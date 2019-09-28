@@ -69,7 +69,7 @@ Definitions:
 * `I2OSP` is as defined in [RFC3447](https://www.ietf.org/rfc/rfc3447.txt) (Big endian decoding)
 * `flip_bits` is a function that returns the bitwise negation of its input
 * `""` is the empty string
-* `a b` is the concatenation of `a` with `b`
+* `a | b` is the concatenation of `a` with `b`
 
 Procedure:
 
@@ -80,9 +80,9 @@ Procedure:
 3. lamport_1 = ikm_to_lamport_sk(not_IKM, index)
 4. lamport_PK = ""
 5. for i = 0 to 255
-       lamport_PK = lamport_PK SHA256(lamport_0[i])
+       lamport_PK = lamport_PK | SHA256(lamport_0[i])
 6. for i = 0 to 255
-       lamport_PK = lamport_PK SHA256(lamport_1[i])
+       lamport_PK = lamport_PK | SHA256(lamport_1[i])
 7. compressed_PK = SHA256(lamport_PK)
 8. return compressed_PK
 ```
