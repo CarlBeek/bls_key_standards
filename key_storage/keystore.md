@@ -57,9 +57,17 @@ The `cipher.function` encrypts the secret using the decryption key, thus to decr
 |----------------------|-----------------|--------------------------|-------------|-------------------------------------------------|
 | AES-128 Counter Mode | `"aes-128-ctr"` | <ul><li>`"iv"`</li></ul> |             | [RFC 3686](https://tools.ietf.org/html/rfc3686) |
 
-## UUIDs
+## Path
+
+The `path` indicates where in the key-tree a key originates from. It is a string defined by the [Tree Path Specification](/key_derivation/tree_path.md), if no path is known or the path is not relevant, the empty string, `""` indicates this. The `path` can specify an arbitrary depth within the tree and the deepest node within the tree indicates the depth of the key stored within this file.
+
+## UUID
 
 The `uuid` provided in the keystore is a randomly generated UUID as specified by [RFC 4122](https://tools.ietf.org/html/rfc4122). It is intended to be used as a 128-bit proxy for referring to a particular set of keys or account. This level of abstraction provides a means of preserving privacy for a secret-key or for referring to keys when they are not decrypted.
+
+## Version
+
+The `version` is set to `0`.
 
 ## JSON schema
 
@@ -86,6 +94,9 @@ The keystore, at its core, is constructed with modules which allow for the confi
                         }
                     }
                 },
+                "path": {
+                    "type": "string"
+                },
                 "uuid": {
                     "type": "string",
                     "format": "uuid"
@@ -96,6 +107,7 @@ The keystore, at its core, is constructed with modules which allow for the confi
             },
             "required": [
                 "crypto",
+                "path",
                 "uuid",
                 "version"
             ],
