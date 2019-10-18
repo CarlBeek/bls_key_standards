@@ -24,7 +24,7 @@ Every key generated via the key derivation process derives a child key via a set
 
 ### Helper functions
 
-#### `ikm_to_lamport_sk`
+#### `IKM_to_lamport_SK`
 
 Inputs:
 
@@ -75,9 +75,9 @@ Procedure:
 
 ```text
 0. IKM = I2OSP(parent_SK, 32)
-1. lamport_0 = ikm_to_lamport_sk(IKM, index)
+1. lamport_0 = IKM_to_lamport_SK(IKM, index)
 2. not_IKM = flip_bits(IKM)
-3. lamport_1 = ikm_to_lamport_sk(not_IKM, index)
+3. lamport_1 = IKM_to_lamport_SK(not_IKM, index)
 4. lamport_PK = ""
 5. for i = 0 to 255
        lamport_PK = lamport_PK | SHA256(lamport_0[i])
@@ -149,7 +149,7 @@ Outputs:
 Procedure:
 
 ```text
-0. intermediate_sk = hkdf_mod_r(seed)
-1. SK = derive_child_SK(intermediate_sk, 0)
+0. intermediate_SK = HKDF_mod_r(seed)
+1. SK = derive_child_SK(intermediate_SK, 0)
 2. return SK
 ```
