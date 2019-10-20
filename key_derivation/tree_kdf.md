@@ -83,8 +83,8 @@ Procedure:
        lamport_PK = lamport_PK | SHA256(lamport_0[i])
 6. for i = 0 to 255
        lamport_PK = lamport_PK | SHA256(lamport_1[i])
-7. compressed_PK = SHA256(lamport_PK)
-8. return compressed_PK
+7. compressed_lamport_PK = SHA256(lamport_PK)
+8. return compressed_lamport_PK
 ```
 
 #### `HKDF_mod_r`
@@ -105,6 +105,7 @@ Definitions:
 * `"BLS-SIG-KEYGEN-SALT-"` is an ASCII string comprising 20 octets.
 * `""` is the empty string.
 * `OS2IP` is as defined in [RFC3447](https://www.ietf.org/rfc/rfc3447.txt) (Big endian encoding)
+* `r` is the order of the BLS 12-381 curve defined in [the draft IETF BLS signature scheme standard](https://tools.ietf.org/html/draft-irtf-cfrg-bls-signature-00) `r=52435875175126190479447740508185965837690552500527637822603658699938581184513`
 
 Procedure:
 
@@ -131,8 +132,8 @@ Outputs:
 Procedure:
 
 ```text
-0. lamport_PK = parent_SK_to_lamport_PK(parent_SK, index)
-1. SK = HKDF_mod_r(lamport_SK)
+0. compressed_lamport_PK = parent_SK_to_lamport_PK(parent_SK, index)
+1. SK = HKDF_mod_r(compressed_lamport_PK)
 2. return SK
 ```
 
