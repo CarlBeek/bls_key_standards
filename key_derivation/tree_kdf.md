@@ -29,7 +29,7 @@ Every key generated via the key derivation process derives a child key via a set
 Inputs:
 
 * `IKM`, a secret octet string
-* `index`, the index of the desired child node, an integer `0 <= index < 2^256`
+* `salt`, an octet string
 
 Outputs:
 
@@ -47,7 +47,7 @@ Definitions:
 Procedure:
 
 ``` text
-0. PRK = HKDF-Extract(index, IKM)
+0. PRK = HKDF-Extract(salt, IKM)
 1. OKM = HKDF-Expand(PRK, "" , L)
 2. lamport_SK = bytes_split(OKM, K)
 3. return lamport_SK
@@ -74,17 +74,18 @@ Definitions:
 Procedure:
 
 ```text
-0. IKM = I2OSP(parent_SK, 32)
-1. lamport_0 = IKM_to_lamport_SK(IKM, index)
-2. not_IKM = flip_bits(IKM)
-3. lamport_1 = IKM_to_lamport_SK(not_IKM, index)
-4. lamport_PK = ""
-5. for i = 0 to 255
-       lamport_PK = lamport_PK | SHA256(lamport_0[i])
+0. salt = I2OSP(index, 32)
+1. IKM = I2OSP(parent_SK, 32)
+2. lamport_0 = IKM_to_lamport_SK(IKM, salt)
+3. not_IKM = flip_bits(IKM)
+4. lamport_1 = IKM_to_lamport_SK(not_IKM, salt)
+5. lamport_PK = ""
 6. for i = 0 to 255
+       lamport_PK = lamport_PK | SHA256(lamport_0[i])
+7. for i = 0 to 255
        lamport_PK = lamport_PK | SHA256(lamport_1[i])
-7. compressed_lamport_PK = SHA256(lamport_PK)
-8. return compressed_lamport_PK
+8. compressed_lamport_PK = SHA256(lamport_PK)
+9. return compressed_lamport_PK
 ```
 
 #### `HKDF_mod_r`
