@@ -1,9 +1,10 @@
 # Keystore
 
 A keystore is a mechanism for storing private keys. It is a JSON file that encrypts a private key and is the standard for interchanging keys between devices as until a user provides their password, their key is safe.
- A keystore is comprised of modules which specify a cryptographic construction and the corresponding parameters for a specific portion of deriving a secret.
 
 ## Definition
+
+A keystore is comprised of modules which specify a cryptographic construction and the corresponding parameters for a specific portion of deriving a secret.
 
 The process of decrypting the secret held within a keystore can be broken down into 3 sub-processes: obtaining the decryption key, verifying the password and decrypting the secret. Each process has its own functions which can be selected from as well as parameters required for the function all of which are specified within the keystore file itself.
 

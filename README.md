@@ -1,4 +1,7 @@
-# Key standards for BLS12-381
+
+# DEPRECATED: Key standards for BLS12-381
+
+__These specifications have been deprecated in favour of EIPs [2333](https://github.com/ethereum/EIPs/pull/2333), [2334](https://github.com/ethereum/EIPs/pull/2334), [2335](https://github.com/ethereum/EIPs/pull/2335).__
 
 In order to further enhance interoperability, it is useful to define standards in addition to the [BLS Signature Scheme](https://tools.ietf.org/html/draft-irtf-cfrg-bls-signature-00), and [BLS hash to curve](https://tools.ietf.org/html/draft-irtf-cfrg-hash-to-curve-04) standards.
 
